@@ -14,7 +14,7 @@ Useful for setting up a local ABAP for own education. Not intended for productio
 
     On Windows I suggest to install Git Bash as well (you'll be asked during the installation process).
 
-    **Hint:** Installing git is actually not really needed. Alternatively, you could also copy/download this Dockerfile to your machine.
+    **Hint:** Installing git is actually not really needed. Alternatively, you could also copy/download this Dockerfile etc. to your machine.
 
 1. Clone this repo
 
@@ -23,7 +23,7 @@ Useful for setting up a local ABAP for own education. Not intended for productio
     cd sap-nw-abap-trial-docker
     ```
 
-1. Download [SAP NW ABAP 7.5x Trial from SAP](https://tools.hana.ondemand.com/#abap) ([SAP Store direct link](https://store.sap.com/sap/cp/ui/resources/store/html/SolutionDetails.html?pid=0000014493&catID=&pcntry=DE&sap-language=EN&_cp_id=id-1477346420741-0)), then:
+1. Download [SAP NW ABAP 7.5x Trial from SAP](https://tools.hana.ondemand.com/#abap) from [SAP Store](https://store.sap.com/sap/cp/ui/resources/store/html/SolutionDetails.html?pid=0000014493&catID=&pcntry=DE&sap-language=EN&_cp_id=id-1477346420741-0), then:
     - Create a folder `sapdownloads` inside the clone
         - `mkdir sapdownloads`
     - Extract the downloaded rar files into the folder we just created
@@ -84,20 +84,9 @@ Useful for setting up a local ABAP for own education. Not intended for productio
 
     Your installation has been successful if you see the followong message: **Installation of NPL successful**
 
-    **Hint:** This installation will take about 20-30 minutes. Once done your SAP is running. Next stop the system and exit the container.
+    **Hint:** This installation will take about 20-30 minutes. Once done your SAP is running. Next, stop the system and exit the container.
 
 ## Starting and Stopping the NW ABAP 7.51 Trial
-
-1. Stopping SAP NW ABAP Trial and container (`ALL` can typically be omitted)
-
-    ```sh
-    su npladm
-    stopsap ALL
-    exit
-    exit
-    ```
-
-    **Hint:** After the second `exit` the Docker container is stopped.
 
 1. Starting the container + SAP NW ABAP Trial (use this from now on instead of `docker run ...` from above)
 
@@ -107,6 +96,17 @@ Useful for setting up a local ABAP for own education. Not intended for productio
     su npladm
     startsap ALL
     ```
+
+1. Stopping SAP NW ABAP Trial and container (`ALL` can be omitted)
+
+    ```sh
+    su npladm
+    stopsap ALL
+    exit
+    exit
+    ```
+
+    **Hint:** After the second `exit` the Docker container is stopped.
 
 ## Important Post Installation Steps
 
