@@ -1,0 +1,46 @@
+# build artefacts
+build
+dist
+
+# user project config
+.user.nabi.json
+
+# Eclipse
+.project
+.classpath
+.settings/
+.launch
+.launch/
+
+# Netbeans
+nb-configuration.xml
+
+# IntelliJ
+.idea/
+*.iml/
+*.iws
+
+# visual studio code
+.vscode
+
+# Mac
+.DS_Store
+
+# Maven
+target/
+
+# Node
+node_modules
+npm-debug.log
+
+# bower
+bower_components
+
+# eslint
+eslint.log
+eslint.tap
+
+# Other
+todo
+download
+sapdownloads
