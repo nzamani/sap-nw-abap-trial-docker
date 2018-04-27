@@ -2,6 +2,9 @@
 
 Useful for setting up a local ABAP for own education. Not intended for production. After all, we're putting a fat monolith into Docker. However, using Docker still allows you to keep your host system clean of all the mess any installation can cause.
 
+See my YouTube video for additional details: [Installing SAP NW ABAP 7.51 SP02 into Docker](https://www.youtube.com/watch?v=H0GEg8r7P48)
+
+
 ## Instructions
 
 1. Install [Docker](https://www.docker.com/community-edition)
@@ -23,7 +26,7 @@ Useful for setting up a local ABAP for own education. Not intended for productio
     cd sap-nw-abap-trial-docker
     ```
 
-1. Download [SAP NW ABAP 7.5x Trial from SAP](https://tools.hana.ondemand.com/#abap) from [SAP Store](https://store.sap.com/sap/cp/ui/resources/store/html/SolutionDetails.html?pid=0000014493&catID=&pcntry=DE&sap-language=EN&_cp_id=id-1477346420741-0), then:
+1. Download [SAP NW ABAP 7.51 Trial from SAP](https://tools.hana.ondemand.com/#abap) from [SAP Store](https://store.sap.com/sap/cp/ui/resources/store/html/SolutionDetails.html?pid=0000014493&catID=&pcntry=DE&sap-language=EN&_cp_id=id-1477346420741-0), then:
     - Create a folder `sapdownloads` inside the clone
         - `mkdir sapdownloads`
     - Extract the downloaded rar files into the folder we just created
