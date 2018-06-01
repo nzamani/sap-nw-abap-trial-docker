@@ -4,6 +4,7 @@ Useful for setting up a local ABAP for own education. Not intended for productio
 
 See my YouTube video for additional details: [Installing SAP NW ABAP 7.51 SP02 into Docker](https://www.youtube.com/watch?v=H0GEg8r7P48)
 
+Check also my blog [Installing SAP NW ABAP into Docker](https://blogs.sap.com/2018/05/30/installing-sap-nw-abap-into-docker/). There you'll find links to the whole blog series.
 
 ## Instructions
 
