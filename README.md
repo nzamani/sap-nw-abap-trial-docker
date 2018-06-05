@@ -6,6 +6,13 @@ See my YouTube video for additional details: [Installing SAP NW ABAP 7.51 SP02 i
 
 Check also my blog [Installing SAP NW ABAP into Docker](https://blogs.sap.com/2018/05/30/installing-sap-nw-abap-into-docker/). There you'll find links to the whole blog series.
 
+## Attribution
+
+The Dockerfile is based on:
+
+- [This Dockerfile by Gregor Wolf](https://bitbucket.org/gregorwolf/dockernwabap750/src/25ca7d78266bef8ed41f1373801fd5e63e0b9552/Dockerfile?at=master&fileviewer=file-view-default)
+- [This Dockerfile by Tobias Hofmann](https://github.com/tobiashofmann/sap-nw-abap-docker/blob/master/Dockerfile)
+
 ## Instructions
 
 1. Install [Docker](https://www.docker.com/community-edition)
