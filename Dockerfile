@@ -1,4 +1,4 @@
-FROM opensuse:latest
+FROM opensuse/archive:latest
 
 ENV LANG=en_US.UTF-8
 
