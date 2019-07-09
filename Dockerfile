@@ -10,7 +10,7 @@ RUN mkdir /run/uuidd && chown uuidd /var/run/uuidd && /usr/sbin/uuidd
 
 # Copy expect script + the extracted SAP NW ABAP files to the container
 COPY install.exp /tmp/sapdownloads/
-COPY sapdownloads/TD752SP01 /tmp/sapdownloads/
+COPY sapdownloads /tmp/sapdownloads/
 
 WORKDIR /tmp/sapdownloads
 
