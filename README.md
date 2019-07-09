@@ -1,10 +1,13 @@
-# SAP NW ABAP Trial in Docker
+# SAP NW ABAP 7.52 SP01 Trial in Docker
 
 Useful for setting up a local ABAP for own education. Not intended for production. After all, we're putting a fat monolith into Docker. However, using Docker still allows you to keep your host system clean of all the mess any installation can cause.
 
 See my YouTube video for additional details: [Installing SAP NW ABAP 7.51 SP02 into Docker](https://www.youtube.com/watch?v=H0GEg8r7P48)
 
 Check also my blog [Installing SAP NW ABAP into Docker](https://blogs.sap.com/2018/05/30/installing-sap-nw-abap-into-docker/). There you'll find links to the whole blog series.
+
+**HINT:** Looking for NW ABAP 7.51 SP02? See [branch nw-abap-7.51](https://github.com/nzamani/sap-nw-abap-trial-docker/tree/nw-abap-7.51)
+
 
 ## Attribution
 
@@ -21,6 +24,25 @@ The Dockerfile is based on:
     - Just add 100 GB to the existing value :-)
     - You may want to increase the `Memory` in Docker's advanced settings (I chose `6 GiB`)
 
+    **IMPORTANT:** if you skip this step you may get an error during installation!
+
+1. Set **vm.max_map_count** to avoid intsallation error
+
+    For **NW ABAP 7.52** the installation tries to set **vm.max_map_count** in case it assumes it's value is too low. However, if that's the case you'll get an error similar to **sysctl: setting key "vm.max_map_count": Read-only file system**. So before starting the installation it’s important to set the value for **vm.max_map_count** to something equal to or higher than what the installation needs, otherwise the installation will try to increase the value and you’ll get the same error again and again... For me the value 1000000 worked just fine. Here is how you can change the value:
+
+    - Linux:
+        `sysctl -w vm.max_map_count=1000000`
+    - macOS wit Docker for Mac (FYI see also here):
+        `screen ~/Library/Containers/com.docker.docker/Data/vms/0/tty` or `screen ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/tty` (one of them should work)
+        `sysctl -w vm.max_map_count=1000000`
+    - Windows and macOS with Docker Toolbox
+        `docker-machine ssh`
+        `sudo sysctl -w vm.max_map_count=1000000`
+
+    Finally, check via `sysctl vm.max_map_count` and exit via `crtl+a` and `ctrl+d`.
+
+    For additional details see [here](https://www.elastic.co/guide/en/elasticsearch/reference/master/docker.html#docker-cli-run-prod-mode), [here](https://deployeveryday.com/2016/09/23/quick-tip-docker-xhyve.html), and [SAP Note 900929](https://launchpad.support.sap.com/#/notes/900929) which even recommends to use the maximum possible value of 2147483647 **for the sake of simplicity** (in a slightly different context).
+
 1. Install [Git](https://git-scm.com)
 
     On Windows I suggest to install Git Bash as well (you'll be asked during the installation process).
@@ -34,10 +56,12 @@ The Dockerfile is based on:
     cd sap-nw-abap-trial-docker
     ```
 
-1. Download [SAP NW ABAP 7.51 Trial from SAP](https://tools.hana.ondemand.com/#abap) from [SAP Store](https://store.sap.com/sap/cp/ui/resources/store/html/SolutionDetails.html?pid=0000014493&catID=&pcntry=DE&sap-language=EN&_cp_id=id-1477346420741-0), then:
+1. Download [SAP NW ABAP 7.52 SP01 Trial from SAP](https://developers.sap.com/germany/trials-downloads.html) (search for **7.52**), then:
     - Create a folder `sapdownloads` inside the clone
         - `mkdir sapdownloads`
-    - Extract the downloaded rar files into the folder we just created
+    - Extract the downloaded rar files into the folder we just created (just extract the first rar file)
+
+    This results in a folder `sapdownloads/TD752SP01` which contains the actual/extracted installation files.
 
     **Hint:** SAP wants to know who downloads the NW ABAP Trial version. Thus, you will have to logon with your own account before you can start the download. Creating an account is free, so is the download. The account can be the same account you use for the SAP Communitiy / SCN.
 
@@ -46,13 +70,13 @@ The Dockerfile is based on:
     - Without Proxy
 
         ```sh
-        docker build -t nwabap:7.51 .
+        docker build -t nwabap:7.52 .
         ```
 
     - Behind a Proxy
 
         ```sh
-        docker build --build-arg http_proxy=http://proxy.mycompany.corp:1234 --build-arg https_proxy=http://proxy.mycompany.corp:1234 -t nwabap:7.51 .
+        docker build --build-arg http_proxy=http://proxy.mycompany.corp:1234 --build-arg https_proxy=http://proxy.mycompany.corp:1234 -t nwabap:7.52 .
         ```
 
         **Hint:** In a proxy environment your `docker build` command (see above) will fail in case you don't set the proxy as mentioned above or in case you use wrong proxy settings. Also consider that you might have to set the proxy manually for some software installed in the container.
@@ -62,22 +86,22 @@ The Dockerfile is based on:
     - Use this if you want to map the default SAP ports as they come on localhost (preferred)
 
         ```sh
-        docker run -p 8000:8000 -p 44300:44300 -p 3300:3300 -p 3200:3200 -h vhcalnplci --name nwabap751 -it nwabap:7.51 /bin/bash
+        docker run -p 8000:8000 -p 44300:44300 -p 3300:3300 -p 3200:3200 -h vhcalnplci --name nwabap752 -it nwabap:7.52 /bin/bash
         ```
 
     - Use this one if "random" ports on localhost are fine for you
 
         ```sh
-        docker run -P -h vhcalnplci --name nwabap751 -it nwabap:7.51 /bin/bash
+        docker run -P -h vhcalnplci --name nwabap752 -it nwabap:7.52 /bin/bash
         ```
 
     **Hint:** You could also use `--rm` to make the container is removed after you exit your cli/terminal, i.e.:
 
       ```sh
-      docker run -p 8000:8000 -p 44300:44300 -p 3300:3300 -p 3200:3200 -h vhcalnplci --rm --name nwabap751 -it nwabap:7.51 /bin/bash
+      docker run -p 8000:8000 -p 44300:44300 -p 3300:3300 -p 3200:3200 -h vhcalnplci --rm --name nwabap752 -it nwabap:7.52 /bin/bash
       ```
 
-1. Now start the installation of SAP NW ABAP 7.51 Trial
+1. Now start the installation of SAP NW ABAP 7.52 Trial
 
     - Auto install via Expect script (suggested for simplicity)
 
@@ -97,12 +121,12 @@ The Dockerfile is based on:
 
     **Hint:** This installation will take about 20-30 minutes. Once done your SAP is running. Next, stop the system and exit the container.
 
-## Starting and Stopping the NW ABAP 7.51 Trial
+## Starting and Stopping the NW ABAP 7.52 Trial
 
 1. Starting the container + SAP NW ABAP Trial (use this from now on instead of `docker run ...` from above)
 
     ```sh
-    docker start -i nwabap751
+    docker start -i nwabap752
     /usr/sbin/uuidd
     su npladm
     startsap ALL
@@ -125,7 +149,7 @@ The Dockerfile is based on:
 
     - Open SAP GUI and logon
         - **User:** SAP*
-        - **Password:** Appl1ance
+        - **Password:** Down1oad
         - **Client:** 000
 
     - Open Transaction `SLICENSE`
@@ -139,7 +163,7 @@ The Dockerfile is based on:
     - Choose the downloaded file `NPL.txt`
     - Done - happy learning. Now logon with the dev user.
 
-    You can now logon to `client 001` with any of the following users (all share the same password `Appl1ance`, typically you would work with `DEVELOPER`):
+    You can now logon to `client 001` with any of the following users (all share the same password `Down1oad`, typically you would work with `DEVELOPER`):
 
       - **User:** DEVELOPER (Developer User)
       - **User:** BWDEVELOPER (Developer User)
@@ -164,10 +188,10 @@ The Dockerfile is based on:
 
 ## Logfiles
 
-Assuming you have started your container (not neccessaryly the NW ABAP in the container) and switched to user `npladm`:
+Assuming you have started your container (not necessarily the NW ABAP in the container) and switched to user `npladm`:
 
   ```sh
-  docker start -i nwabap751
+  docker start -i nwabap752
   /usr/sbin/uuidd
   su npladm
   ```
