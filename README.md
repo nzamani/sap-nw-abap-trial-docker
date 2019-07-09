@@ -31,13 +31,24 @@ The Dockerfile is based on:
     For **NW ABAP 7.52** the installation tries to set **vm.max_map_count** in case it assumes it's value is too low. However, if that's the case you'll get an error similar to **sysctl: setting key "vm.max_map_count": Read-only file system**. So before starting the installation it’s important to set the value for **vm.max_map_count** to something equal to or higher than what the installation needs, otherwise the installation will try to increase the value and you’ll get the same error again and again... For me the value 1000000 worked just fine. Here is how you can change the value:
 
     - Linux:
-        `sysctl -w vm.max_map_count=1000000`
+
+        ```sh
+        sysctl -w vm.max_map_count=1000000
+        ```
+
     - macOS wit Docker for Mac (FYI see also here):
-        `screen ~/Library/Containers/com.docker.docker/Data/vms/0/tty` or `screen ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/tty` (one of them should work)
-        `sysctl -w vm.max_map_count=1000000`
+
+        ```sh
+        screen ~/Library/Containers/com.docker.docker/Data/vms/0/tty
+        sysctl -w vm.max_map_count=1000000
+        ```
+
     - Windows and macOS with Docker Toolbox
-        `docker-machine ssh`
-        `sudo sysctl -w vm.max_map_count=1000000`
+
+        ```sh
+        docker-machine ssh
+        sudo sysctl -w vm.max_map_count=1000000
+        ```
 
     Finally, check via `sysctl vm.max_map_count` and exit via `crtl+a` and `ctrl+d`.
 
