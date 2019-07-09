@@ -6,8 +6,11 @@ See my YouTube video for additional details: [Installing SAP NW ABAP 7.51 SP02 i
 
 Check also my blog [Installing SAP NW ABAP into Docker](https://blogs.sap.com/2018/05/30/installing-sap-nw-abap-into-docker/). There you'll find links to the whole blog series.
 
-**HINT:** Looking for NW ABAP 7.51 SP02? See [branch nw-abap-7.51](https://github.com/nzamani/sap-nw-abap-trial-docker/tree/nw-abap-7.51)
+**HINTS:**
 
+- Looking for NW ABAP 7.51 SP02? See [branch nw-abap-7.51](https://github.com/nzamani/sap-nw-abap-trial-docker/tree/nw-abap-7.51)
+
+For additional details about NW ABAP 7.52 SP04 see the [official SAP announcement by Julie Plummer](https://blogs.sap.com/2019/07/01/as-abap-752-sp04-developer-edition-to-download/).
 
 ## Attribution
 
@@ -68,11 +71,10 @@ The Dockerfile is based on:
     ```
 
 1. Download [SAP NW ABAP 7.52 SP01 Trial from SAP](https://developers.sap.com/germany/trials-downloads.html) (search for **7.52**), then:
-    - Create a folder `sapdownloads` inside the clone
+    - create a folder `sapdownloads` inside the clone
         - `mkdir sapdownloads`
-    - Extract the downloaded rar files into the folder we just created (just extract the first rar file)
-
-    This results in a folder `sapdownloads/TD752SP01` which contains the actual/extracted installation files.
+    - extract the downloaded rar files into the folder we just created (just extract the first rar file), i.e. assuming you have unrar installed (else use your tool of choice)
+        - `unrar x TD752SP01.part01.rar ./sapdownloads`
 
     **Hint:** SAP wants to know who downloads the NW ABAP Trial version. Thus, you will have to logon with your own account before you can start the download. Creating an account is free, so is the download. The account can be the same account you use for the SAP Communitiy / SCN.
 
