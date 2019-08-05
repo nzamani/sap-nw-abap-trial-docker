@@ -33,13 +33,12 @@ if {$force_conservative} {
 set timeout -1
 set password "Down1oad"
 
-# see doco inside install.sh for options, i.e. -h -s -k -g, but we won't use any of them
-spawn ./install.sh
+# see doco inside install.sh for options, i.e. -h -s -k -g
+# Force hostname vhcalnplci during build 
+spawn ./install.sh -s -h vhcalnplci
 
-expect "Your distribution 'opensuse-leap' was not tested. Do you want to continue?"
-send -- "yes\r"
-#expect "Hit enter to continue!" 
-#send -- "\rq" 
+expect "Hit enter to continue!" 
+send -- "\rq" 
 expect "Do you agree to the above license terms? yes/no:"
 send -- "yes\r"
 expect "Please enter a password:"
