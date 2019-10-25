@@ -96,7 +96,15 @@ The Dockerfile is based on:
 
 1. Create/Start a container with one of the following commands:
 
-    - Use this if you want to map the default SAP ports as they come on localhost (preferred)
+    - **Recommended:** Use a local folder for the database so that the data remains even after removing the container. Optionally, add a network so that you can connect e. g. a WebIDE lateron
+
+        ```sh
+        docker network create sap
+
+        docker run -p 8000:8000 --network=sap -v <localFolder>:/sybase/NPL/ -p 44300:44300 -p 3300:3300 -p 3200:3200 -h vhcalnplci --name nwabap752 -it nwabap:7.52 /bin/
+        ```
+
+    - Use this if you want to map the default SAP ports as they come on localhost (preferred) and basically only want to evaluate without leaving a trace
 
         ```sh
         docker run -p 8000:8000 -p 44300:44300 -p 3300:3300 -p 3200:3200 -h vhcalnplci --name nwabap752 -it nwabap:7.52 /bin/bash
