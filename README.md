@@ -46,12 +46,20 @@ The Dockerfile is based on:
         sysctl -w vm.max_map_count=1000000
         ```
 
-    - Windows and macOS with Docker Toolbox
+    - Windows and macOS with Docker Toolbox:
 
         ```sh
         docker-machine ssh
         sudo sysctl -w vm.max_map_count=1000000
         ```
+
+    - Windows Docker Desktop:
+
+        '''sh
+        open powershell
+        wsl -d docker-desktop
+        sysctl -w vm.max_map_count=1000000
+        '''
 
     Finally, check via `sysctl vm.max_map_count` and exit via `crtl+a` and `ctrl+d`.
 
