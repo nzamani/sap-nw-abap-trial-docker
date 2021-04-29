@@ -1,5 +1,7 @@
 # SAP NW ABAP 7.52 SP01 Trial in Docker
 
+**UPDATE:** Meanwhile, SAP has published a Docker Image, for details see [SAP ABAP Platform 1909, Developer Edition: AVAILABLE NOW](https://blogs.sap.com/2021/02/15/sap-abap-platform-1909-developer-edition-available-soon/). SAP's official Docker Image is the preferred way to get the latest ABAP Dev Edition up and running easily.
+
 Useful for setting up a local ABAP for own education. Not intended for production. After all, we're putting a fat monolith into Docker. However, using Docker still allows you to keep your host system clean of all the mess any installation can cause.
 
 See my YouTube video for additional details: [Installing SAP NW ABAP 7.51 SP02 into Docker](https://www.youtube.com/watch?v=H0GEg8r7P48)
